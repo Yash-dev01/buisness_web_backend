@@ -8,6 +8,22 @@ dotenv.config();
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
+const SELF_URL =
+  process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+
+function startKeepAlive() {
+  setInterval(async () => {
+    try {
+      const response = await fetch(`${SELF_URL}/api/health`);
+
+      console.log(
+        `[Keep Alive] ${new Date().toISOString()} - ${response.status}`
+      );
+    } catch (error) {
+      console.error('[Keep Alive] Failed:', error);
+    }
+  }, 10 * 60 * 1000);
+}
 app.use(
   cors({
     origin: [
@@ -43,6 +59,7 @@ async function start() {
       console.log(
         `Khilona Point API running on http://localhost:${PORT}`
       );
+      startKeepAlive();
     });
   } catch (err) {
     console.error('Fatal server boot error:', err);
