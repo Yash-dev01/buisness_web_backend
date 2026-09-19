@@ -29,7 +29,7 @@ app.use(
     origin: [
       'http://localhost:5173',
       'http://localhost:4173',
-      'https://khilonapointandcyclestoreofficial.netlify.app/'
+      'https://khilonapointandcyclestoreofficial.netlify.app'
     ],
     credentials: true,
   })
