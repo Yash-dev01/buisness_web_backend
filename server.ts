@@ -14,10 +14,10 @@ const SELF_URL =
 function startKeepAlive() {
   setInterval(async () => {
     try {
-      const response = await fetch(`${SELF_URL}/api/health`);
+      const response = await fetch(`${SELF_URL}/api/categories`);
 
       console.log(
-        `[Keep Alive] ${new Date().toISOString()} - ${response.status}`
+        `[Keep Alive] ${new Date().toISOString()} - /api/categories - ${response.status}`
       );
     } catch (error) {
       console.error('[Keep Alive] Failed:', error);
